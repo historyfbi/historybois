@@ -8,7 +8,13 @@
 {% endblock %}
 
 {% block main %}
-    {{ form }}
+    <form method="POST">
+        {{ form }}
+        {% csrf_token %}
+        <br /><br />
+        <input type="submit" value="Sign Up" class="btn btn-primary form-control" />
+        <br /><br />
+    </form>
 {% endblock %}
 
 {% block scripts %}
@@ -22,13 +28,7 @@
 
         form.forEach(field => {
             field.setAttribute('class', field.getAttribute('class') + ' form-control')
-            field.innerHTML = field.innerHTML + "<br />"
-        });
-
-        helptext = document.getElementsByClassName('helptext')
-
-        helptext.forEach(help => {
-            help.innerHTML = help.innerHTML + "<br />"
+            field.innerHTML = field.innerHTML + "<br /><br />"
         })
     </script>
 {% endblock %}
