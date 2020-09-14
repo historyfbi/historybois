@@ -1,0 +1,33 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+
+{% block title %}Timeline{% endblock %}
+
+{% block main %}
+    <h1>Timeline</h1>
+    <img src="{% static 'posts/historybois.jpg' %}" />
+
+    {% for post in posts %}
+        <h1><a href="/p/{{ post.pk }}/">{{ post }}</a></h1>
+    {% endfor %}
+
+
+{% if is_paginated %}
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        {% if page_obj.has_previous %}
+        <a type="button" href="/?page={{ page_obj.previous_page_number }}" class="btn btn-secondary"><<</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a type="button" href="?page={{ num }}" class="btn btn-secondary">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a type="button" href="?page={{ num }}" class="btn btn-outline-secondary">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a type="button" href="/?page={{ page_obj.next_page_number }}" class="btn btn-secondary">>></a>
+        {% endif %}
+    </div>
+{% endif %}
+
+{% endblock %}

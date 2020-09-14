@@ -1,0 +1,29 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block main %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="{{ form.username.auto_id }}">{{ form.username.label }}</label>
+        {{ form.username }}
+        <br />
+        <label for="{{ form.password.auto_id }}">{{ form.password.label }}</label>
+        {{ form.password }}
+        <br />
+        <button type="submit" class="btn btn-primary form-control">Login</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const form = [
+            document.getElementById("{{ form.username.auto_id }}"),
+            document.getElementById("{{ form.password.auto_id }}")
+        ]
+
+        form.forEach(field => {
+            field.setAttribute('class', field.getAttribute('class') + ' form-control')
+        });
+    </script>
+{% endblock %}

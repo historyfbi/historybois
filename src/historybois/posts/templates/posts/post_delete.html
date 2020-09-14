@@ -1,0 +1,13 @@
+{% extends 'posts/base.html' %}
+
+{% block main %}
+    <form method="POST">
+        <legend>
+            <h1>Delete Post</h1>
+        </legend>
+        <hr>
+        {% csrf_token %}
+        <a class="btn btn-info" href="{% url 'posts:post_detail' pk=post.uid %}">Cancel</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+{% endblock %}

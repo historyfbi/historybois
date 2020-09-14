@@ -1,0 +1,34 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block meta %}
+    <meta name="title" content="Sign Up">
+    <meta name="description" content="sign up to the history bois! and start historing hahahahha!">
+{% endblock %}
+
+{% block main %}
+    {{ form }}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const form = [
+            document.getElementById("{{ form.username.auto_id }}"),
+            document.getElementById("{{ form.email.auto_id }}"),
+            document.getElementById("{{ form.password1.auto_id }}"),
+            document.getElementById("{{ form.password2.auto_id }}")
+        ]
+
+        form.forEach(field => {
+            field.setAttribute('class', field.getAttribute('class') + ' form-control')
+            field.innerHTML = field.innerHTML + "<br />"
+        });
+
+        helptext = document.getElementsByClassName('helptext')
+
+        helptext.forEach(help => {
+            help.innerHTML = help.innerHTML + "<br />"
+        })
+    </script>
+{% endblock %}
