@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import View
 from django.contrib.auth import logout
@@ -11,7 +12,19 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse_lazy('accounts:login'))
 
-class SignUpView(CreateView):
+
+class SignUpView(CreateView):  # UserPassesTestMixin
     form_class = forms.SignUp
     success_url = reverse_lazy('accounts:login')
     template_name = 'accounts/signup.html'
+
+    def get(self, *args, **kwargs):
+
+        if self.request.user.is_authenticated:
+            return redirect("/accounts/profile/")
+        else:
+            return super().get(*args, **kwargs)
+
+
+    # def test_func(self):
+    #     return not self.request.user.is_authenticated
