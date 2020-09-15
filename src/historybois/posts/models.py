@@ -5,7 +5,6 @@ from markdownx.utils import markdownify
 from django.utils.text import slugify
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.html import strip_tags
 import uuid
 
 class HistoryPost(models.Model):
@@ -18,21 +17,23 @@ class HistoryPost(models.Model):
     )
     title = models.CharField(max_length=20)
     post = MarkdownxField()
-    created_at = models.DateField(default=timezone.now, editable=False)
-    updated_at = models.DateField(auto_now=True)
+    updated = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=timezone.now, editable=False)
+    updated_at = models.DateTimeField(auto_now=True)
 
     @property
     def post_md(self):
-        return markdownify(strip_tags(self.post))
+        return markdownify(self.post)
 
     def save(self, *args, **kwargs):
-        while True:
-            unique_uid = str(uuid.uuid4())[:8]
-            if not HistoryPost.objects.filter(uid=unique_uid).exists():
-                break
+        if not self.updated:
+            while True:
+                unique_uid = str(uuid.uuid4())[:8]
+                if not HistoryPost.objects.filter(uid=unique_uid).exists():
+                    break
 
 
-        self.uid = unique_uid
+            self.uid = unique_uid
         super(HistoryPost, self).save(*args, **kwargs)
 
     def get_absolute_url(self, *args, **kwargs):

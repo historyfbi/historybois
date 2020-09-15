@@ -1,16 +1,38 @@
 {% extends 'posts/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}Timeline{% endblock %}
 
 {% block main %}
-    <h1>Timeline</h1>
-    <img src="{% static 'posts/historybois.jpg' %}" />
-
+    <h1>Welcome To HistoryBois!</h1>
+    <br />
+    <small class="text-muted">Powered By</small>
+    <a href="https://twitter.com/historyfbi">
+        <img class="w-100 h-100" src="{% static 'posts/historybois.jpg' %}" />
+    </a>
+    <br />
+    <br />
     {% for post in posts %}
-        <h1><a href="/p/{{ post.pk }}/">{{ post }}</a></h1>
+        <div class="card">
+            <div class="card-header d-flex align-items-baseline">
+                <h1><a style="text-decoration: none;" href="/p/{{ post.pk }}/">{{ post.title }}</a></h1>
+                <small class="text-muted ml-4">by @{{ post.author }}</small>
+            </div>
+            <div class="card-body">
+                {{ post.post_md|safe }}
+            </div>
+            <div class="card-footer">
+                {% if post.updated == True %}
+                    updated {{ post.created_at|naturaltime }}
+                {% else %}
+                    created {{ post.updated_at|naturaltime }}
+                {% endif %}
+            </div>
+        </div>
+        <br />
     {% endfor %}
-
+    <br />
 
 {% if is_paginated %}
     <div class="btn-group mr-2" role="group" aria-label="First group">

@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'accounts.apps.AccountsConfig',
     # Third Party
-    'markdownx'
+    'markdownx',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [

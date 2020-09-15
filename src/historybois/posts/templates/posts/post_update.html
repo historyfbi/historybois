@@ -1,1 +1,35 @@
-{{ form }}
+{% extends 'posts/base.html' %}
+{% load markdown %}
+
+{% block title %}Update Post {{ post.title }}{% endblock %}
+
+{% block main %}
+<form class="form-group" method="POST">
+    {% csrf_token %}
+    <!-- <label class="form-label" for="{{ form.title.auto_id }}">{{ form.title.label }}</label>
+    {{ form.title.errors }}
+    {{ form.title }}
+    <br />
+    <label class="form-label" for="{{ form.post.auto_id }}">{{ form.post.label }}</label>
+    {{ form.post }}
+    {{ form.post.errors }}
+    <br class="mb-4" />
+    {{ form.media }} -->
+    {{ form }}
+    {{ form.media }}
+    <button type="submit" class="btn btn-primary form-control" value="Update Post">Update Post</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const form = [
+        document.getElementById("{{ form.title.auto_id }}"),
+        document.getElementById("{{ form.post.auto_id }}")
+    ]
+
+    form.forEach(field => {
+        field.setAttribute('class', field.getAttribute('class') + ' form-control')
+    });
+</script>
+{% endblock %}

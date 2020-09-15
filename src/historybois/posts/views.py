@@ -35,10 +35,14 @@ class PostUpdate(UserPassesTestMixin, UpdateView):
     template_name = 'posts/post_update.html'
     context_object_name = 'post'
 
-    def test_func(self):
-        self.post = self.get_object()
+    def form_valid(self, form):
+        form.instance.updated = True
+        return super().form_valid(form)
 
-        return self.request.user == self.post.author
+    def test_func(self):
+        post = self.get_object()
+
+        return self.request.user == post.author
 
 # DELETE "Post"
 class PostDelete(UserPassesTestMixin, DeleteView):

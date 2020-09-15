@@ -13,7 +13,7 @@ class LogoutView(View):
         return redirect(reverse_lazy('accounts:login'))
 
 
-class SignUpView(CreateView):  # UserPassesTestMixin
+class SignUpView(CreateView):
     form_class = forms.SignUp
     success_url = reverse_lazy('accounts:login')
     template_name = 'accounts/signup.html'
@@ -24,7 +24,3 @@ class SignUpView(CreateView):  # UserPassesTestMixin
             return redirect("/accounts/profile/")
         else:
             return super().get(*args, **kwargs)
-
-
-    # def test_func(self):
-    #     return not self.request.user.is_authenticated
