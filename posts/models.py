@@ -12,7 +12,7 @@ class HistoryPost(models.Model):
     uid = models.CharField(
         primary_key=True,
         unique=True,
-        max_length=4
+        max_length=10
     )
     title = models.CharField(max_length=20)
     post = MarkdownxField()
