@@ -2,3 +2,4 @@ django
 django-heroku
 gunicorn
 django-markdownx
+dj-database-url
