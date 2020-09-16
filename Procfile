@@ -1,1 +1,1 @@
-web: gunicorn server.historybois.historybois.wsgi
+web: gunicorn historybois.wsgi
