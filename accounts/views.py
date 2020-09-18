@@ -24,3 +24,8 @@ class SignUpView(CreateView):
             return redirect("/accounts/profile/")
         else:
             return super().get(*args, **kwargs)
+
+class ProfileView(View):
+
+    def get(self, request):
+        return redirect("/")

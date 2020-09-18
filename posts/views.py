@@ -19,7 +19,8 @@ class PostList(ListView):
     model = models.HistoryPost
     template_name = 'posts/post_list.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 5
+    ordering = ["-updated_at"]
 
 # READ "Post" - detail
 class PostDetail(DetailView):

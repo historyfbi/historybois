@@ -12,12 +12,13 @@ class HistoryPost(models.Model):
     uid = models.CharField(
         primary_key=True,
         unique=True,
-        max_length=10
+        max_length=10,
+        editable=False
     )
     title = models.CharField(max_length=20)
     post = MarkdownxField()
     updated = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=timezone.now, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     @property
@@ -31,8 +32,11 @@ class HistoryPost(models.Model):
                 if not HistoryPost.objects.filter(uid=unique_uid).exists():
                     break
 
-
             self.uid = unique_uid
+
+        else:
+            self.updated = True
+
         super(HistoryPost, self).save(*args, **kwargs)
 
     def get_absolute_url(self, *args, **kwargs):

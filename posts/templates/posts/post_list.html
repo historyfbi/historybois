@@ -8,8 +8,9 @@
     <h1>Welcome To HistoryBois!</h1>
     <br />
     <small class="text-muted">Powered By</small>
+    <br />
     <a href="https://twitter.com/historyfbi">
-        <img class="w-100 h-100" src="{% static 'posts/historybois.jpg' %}" />
+        <img class="w-25 h-25" src="{% static 'posts/historybois.jpg' %}" />
     </a>
     <br />
     <br />
@@ -24,9 +25,9 @@
             </div>
             <div class="card-footer">
                 {% if post.updated == True %}
-                    updated {{ post.created_at|naturaltime }}
+                    updated {{ post.updated_at|naturaltime }}
                 {% else %}
-                    created {{ post.updated_at|naturaltime }}
+                    created {{ post.created_at|naturaltime }}
                 {% endif %}
             </div>
         </div>

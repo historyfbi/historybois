@@ -13,6 +13,11 @@
         <h1 class="mr-4">{{ post.title }}</h1>
         <small class="text-muted">by @{{ post.author }}</small>
     </div>
+    {% if user == post.author %}
+        <a href="{% url 'posts:post_delete' pk=post.uid %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'posts:post_update' pk=post.uid %}" class="btn btn-info">Update</a>
+    {% endif %}
+    <br />
     <br />
     <div class="line-breaks">
         {{ post.post_md|safe }}
