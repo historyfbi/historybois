@@ -21,7 +21,7 @@ class PostList(ListView):
     context_object_name = 'posts'
     paginate_by = 5
     ordering = ["-updated_at"]
-
+    
 # READ "Post" - detail
 class PostDetail(DetailView):
     model = models.HistoryPost
